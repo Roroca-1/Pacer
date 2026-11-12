@@ -53,6 +53,7 @@ rm -rf "$D$SHARE/gui" && mv "$D$SHARE/gui.new" "$D$SHARE/gui"
 for b in pacer pacer-ctl pacer-run; do
   install -m755 "bin/$b" "$D$PREFIX/bin/$b"
 done
+install -Dm644 gui/pacer/pacer.svg "$D$PREFIX/share/icons/hicolor/scalable/apps/pacer.svg"
 cat > "$D$PREFIX/share/applications/pacer.desktop" <<DESK
 [Desktop Entry]
 Type=Application
@@ -60,10 +61,16 @@ Name=Pacer
 GenericName=Frame rate limiter
 Comment=Frame rate limiter with per-game presets
 Exec=$PREFIX/bin/pacer
-Icon=video-display
+Icon=pacer
 Terminal=false
 Categories=Game;Utility;
+StartupWMClass=pacer
 DESK
+if [ -z "$D" ]; then   # refresh menus/icon caches when installing for the current user
+  command -v gtk-update-icon-cache >/dev/null && gtk-update-icon-cache -qtf "$PREFIX/share/icons/hicolor" 2>/dev/null || true
+  command -v update-desktop-database >/dev/null && update-desktop-database -q "$PREFIX/share/applications" 2>/dev/null || true
+  command -v kbuildsycoca6 >/dev/null && kbuildsycoca6 >/dev/null 2>&1 || true
+fi
 
 if [ -z "$D" ]; then
   CFGBASE="${XDG_CONFIG_HOME:-$HOME/.config}"

@@ -238,25 +238,8 @@ def repolish(w: QWidget, name: str):
 
 
 def app_icon() -> QIcon:
-    pm = QPixmap(64, 64)
-    pm.fill(Qt.transparent)
-    g = QPainter(pm)
-    g.setRenderHint(QPainter.Antialiasing)
-    g.setBrush(QColor("#181b20"))
-    g.setPen(Qt.NoPen)
-    g.drawRoundedRect(0, 0, 64, 64, 10, 10)
-    pen = QPen(QColor(ACCENT), 5)
-    pen.setCapStyle(Qt.RoundCap)
-    g.setPen(pen)
-    path = QPainterPath()
-    path.moveTo(10, 40)
-    for i, y in enumerate([40, 40, 22, 40, 40, 40]):
-        path.lineTo(10 + i * 9, y)
-    g.drawPath(path)
-    g.setPen(QPen(QColor("#ffffff"), 3, Qt.DashLine))
-    g.drawLine(8, 48, 56, 48)
-    g.end()
-    return QIcon(pm)
+    """Installed theme icon "pacer" (also used by the .desktop entry), else the SVG next to this file."""
+    return QIcon.fromTheme("pacer", QIcon(str(Path(__file__).resolve().parent / "pacer.svg")))
 
 
 # ------------------------------------------------------------------ sidebar rows

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23272e"/>
+      <stop offset="1" stop-color="#14171b"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="116" height="116" rx="24" fill="url(#bg)"/>
+  <rect x="6.5" y="6.5" width="115" height="115" rx="23.5" fill="none" stroke="#2bd47c" stroke-opacity="0.25"/>
+  <!-- evenly spaced frame ticks -->
+  <g stroke="#2bd47c" stroke-width="7" stroke-linecap="round">
+    <line x1="30" y1="44" x2="30" y2="70"/>
+    <line x1="52" y1="44" x2="52" y2="70"/>
+    <line x1="76" y1="44" x2="76" y2="70"/>
+    <line x1="98" y1="44" x2="98" y2="70"/>
+  </g>
+  <!-- flat frametime line -->
+  <line x1="22" y1="88" x2="106" y2="88" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+</svg>
