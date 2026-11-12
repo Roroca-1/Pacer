@@ -1,0 +1,19 @@
+#!/bin/sh
+# Launch a program with the OpenGL frame limiter preloaded.
+#   Steam launch options:  pacer-run %command%
+# Vulkan / DXVK / VKD3D games do not need this (implicit Vulkan layer).
+HERE=$(dirname "$(readlink -f "$0")")
+if [ -n "$PACER_LIBDIR" ]; then LIBDIR=$PACER_LIBDIR
+elif [ -f "$HERE/../build/x86_64/libpacer_gl.so" ]; then LIBDIR="$HERE/../build"   # source tree
+elif [ -d "$HERE/../lib/pacer" ]; then LIBDIR="$HERE/../lib/pacer"
+else LIBDIR="$HOME/.local/lib/pacer"; fi
+# both arches listed: the loader silently skips the one with the wrong ELF class
+# (it may print a harmless "wrong ELF class" note)
+if [ -d "$LIBDIR/preload" ]; then
+  P="$LIBDIR/preload/\$LIB/libpacer_gl.so"     # expanded by ld.so per process arch
+else
+  P="$LIBDIR/x86_64/libpacer_gl.so:$LIBDIR/i386/libpacer_gl.so"
+fi
+export LD_PRELOAD="$P${LD_PRELOAD:+:$LD_PRELOAD}"
+[ $# -eq 0 ] && { echo "usage: pacer-run <command> [args...]" >&2; exit 2; }
+exec "$@"

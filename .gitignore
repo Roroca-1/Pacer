@@ -1,0 +1,9 @@
+/build/
+__pycache__/
+*.pyc
+*.o
+*.so
+*.tmp.*
+/dist/
+# generated locally from Discord's public list; never committed
+exe_titles.tsv.gz

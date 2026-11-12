@@ -1,0 +1,31 @@
+# Maintainer: Kanasara
+pkgname=pacer
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Frame rate limiter for Linux games: per-game presets, in-game hotkeys, smooth or low-latency pacing (Vulkan/DXVK/VKD3D/OpenGL)"
+arch=('x86_64')
+url="https://github.com/Kanasara/pacer"
+license=('MIT')
+depends=('python' 'pyside6' 'vulkan-icd-loader')
+optdepends=('lib32-vulkan-icd-loader: 32-bit Vulkan/DXVK games'
+            'libx11: in-game hotkeys and background detection (X11/XWayland)'
+            'libxcb: background (unfocused) detection')
+makedepends=('gcc' 'make' 'vulkan-headers' 'libxcb' 'lib32-gcc-libs')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "$pkgname-$pkgver"
+  make all
+}
+
+check() {
+  cd "$pkgname-$pkgver"
+  build/tests/pacing_test 120 1
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+  PREFIX=/usr DESTDIR="$pkgdir" ./install.sh
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
