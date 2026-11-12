@@ -3,7 +3,7 @@
 **A frame rate limiter for Linux games**, with per-game presets, a limit you can change in-game, and a choice
 between perfectly flat frame pacing and minimum input latency. Think RTSS's limiter with a small, clean GUI.
 
-[![CI](https://github.com/Kanasara/pacer/actions/workflows/ci.yml/badge.svg)](https://github.com/Kanasara/pacer/actions/workflows/ci.yml)
+[![CI](https://github.com/Roroca-1/pacer/actions/workflows/ci.yml/badge.svg)](https://github.com/Kanasara/pacer/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/kanasara)
 
